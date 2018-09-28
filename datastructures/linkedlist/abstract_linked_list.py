@@ -20,21 +20,23 @@ class AbstractLinkedList(metaclass=ABCMeta):
         counter = 0
         temp = self.head
         
-        if index >= len(self):
+        if index > len(self):
             raise IndexError('List index out of range')
         
         while counter < index:
             temp = temp.next
             counter += 1
+            
         return temp.data
     
     def __str__(self):
-        template = "{}({}) object at <{}>"
-        return template.format(self.__class__.__name__, self.__dict__, id(self))
+        template = "{}({})"
+        return template.format(self.__class__.__name__, self.__dict__)
     
     def __repr__(self):
-        template = "{} object of {} Node objects"
-        return template.format(self.__class__.__name__, len(self))
+        template = "<{} object at {}>"
+        mem_address = '0x' + '{:0>16}'.format(hex(id(self)).upper()[2:])
+        return template.format(self.__class__.__name__, mem_address)
     
     @abstractmethod
     def __iter__(self):
@@ -80,9 +82,11 @@ class AbstractSingleOrDoubleLinkedList(AbstractLinkedList):
 		
         counter = 0
         temp = self.head
+        
         while temp:
             counter += 1
             temp = temp.next
+            
         return counter
     
     def __iter__(self):
@@ -90,12 +94,17 @@ class AbstractSingleOrDoubleLinkedList(AbstractLinkedList):
         """
 		
         temp = self.head
+        
         while temp:
             yield temp.data
             temp = temp.next
             
     def delete_list(self):
+        """Delete all nodes in a list.
+        """
+        
         temp = self.head
+        
         while temp:
             previous = temp.next
             del temp.data
@@ -140,4 +149,5 @@ class CircleLLNode(AbstractNode):
     """
     
     def __init__(self, data=None):
-        super().__init__(self, data)
+        super().__init__(data)
+        self.next = self
