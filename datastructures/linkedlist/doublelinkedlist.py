@@ -37,8 +37,10 @@ class DoubleLinkedList(AbstractSingleOrDoubleLinkedList):
             return
             
         temp = self.head
+        
         while temp.next:
             temp = temp.next
+            
         temp.next = new_node
         new_node.previous = temp
         
@@ -62,8 +64,11 @@ class DoubleLinkedList(AbstractSingleOrDoubleLinkedList):
             return
         
         temp = self.head
+        
         while counter < (index-1):
-            temp = temp.next 
+            temp = temp.next
+            counter += 1
+            
         new_node.next = temp.next
         temp.next = new_node
         new_node.next.previous = new_node
@@ -76,9 +81,7 @@ class DoubleLinkedList(AbstractSingleOrDoubleLinkedList):
             index: position of node to be deleted
         """
         
-        temp = self.head
-        
-        if self.head == 0:
+        if not self.head:
             raise ValueError('List is empty')
         
         temp = self.head
