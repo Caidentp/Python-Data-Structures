@@ -36,8 +36,10 @@ class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
             return
             
         temp = self.head
+        
         while temp.next:
             temp = temp.next
+            
         temp.next = new_node
         
     def insert(self, index, new_node_data):
@@ -60,8 +62,11 @@ class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
             return
         
         temp = self.head
+        
         while counter < (index-1):
             temp = temp.next 
+            counter += 1
+            
         new_node.next = temp.next
         temp.next = new_node
         
@@ -72,9 +77,7 @@ class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
             index: position of node to be deleted
         """
         
-        temp = self.head
-        
-        if self.head == 0:
+        if not self.head:
             raise ValueError('List is empty')
         
         temp = self.head
