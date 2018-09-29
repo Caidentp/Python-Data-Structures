@@ -61,16 +61,12 @@ class AbstractLinkedList(metaclass=ABCMeta):
     @abstractmethod
     def delete_node(self, index):
         pass
-		
-    @abstractmethod
-    def delete_list(self):
-        pass
-	
-		
+
+
 class AbstractSingleOrDoubleLinkedList(AbstractLinkedList):
     """Defines methods common to both singly and doubly linked lists.
     """
-    
+   
     def __init__(self, head_node):
         super().__init__(head_node)
         
