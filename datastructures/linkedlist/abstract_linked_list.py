@@ -16,11 +16,11 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
         returns: data instance variable of appropriate node
         """
-
+        
         counter = 0
         temp = self.head
 
-        if index > len(self):
+        if index > len(self) or not self.head:
             raise IndexError('List index out of range')
 
         while counter < index:
@@ -61,7 +61,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
     @abstractmethod
     def delete_node(self, index):
         pass
-
+	
 
 class AbstractSingleOrDoubleLinkedList(AbstractLinkedList):
     """Defines methods common to both singly and doubly linked lists.
