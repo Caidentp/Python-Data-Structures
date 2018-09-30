@@ -95,17 +95,6 @@ class AbstractSingleOrDoubleLinkedList(AbstractLinkedList):
             yield temp.data
             temp = temp.next
 
-    def delete_list(self):
-        """Delete all nodes in a list.
-        """
-
-        temp = self.head
-
-        while temp:
-            previous = temp.next
-            del temp.data
-            temp = previous
-
 
 class AbstractNode(object):
     """Defines methods common to all types of linked list nodes.
