@@ -91,11 +91,6 @@ class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
 
         for x in range(index-1):
             temp = temp.next
-            if not temp:
-                break
-
-        if not temp or not temp.next:
-            raise IndexError('List index out of range')
 
         next_node = temp.next.next
         temp.next = next_node
