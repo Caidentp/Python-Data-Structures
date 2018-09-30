@@ -5,6 +5,8 @@ from abstract_linked_list import (
 
 
 class CircularLinkedList(AbstractLinkedList):
+    """Class for circular linked list.
+    """
 
     def __init__(self, head_node=None):
         super().__init__(head_node)
@@ -32,6 +34,9 @@ class CircularLinkedList(AbstractLinkedList):
         """Makes instances of linked lists work with keywords that use the iterator protocol.
         """
 
+        if not self.head:
+            return
+        
         temp = self.head
         condition = True
 
