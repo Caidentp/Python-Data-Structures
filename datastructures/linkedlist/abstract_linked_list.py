@@ -7,6 +7,25 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
     def __init__(self, head_node):
         self.head = head_node
+        
+    def __len__(self):
+        """Make instances of linked lists work with Python's len() function.
+
+        returns: how many nodes are present in the linked list
+        """
+
+        counter = 0
+        temp = self.head
+        condition = True
+
+        if self.head:
+            while condition:
+                counter += 1
+                temp = temp.next
+                if temp is self.head or not temp:
+                    condition = False
+
+        return counter
 
     def __getitem__(self, index):
         """Operator overloading [] for retrieving the index of a linked list.
@@ -28,6 +47,22 @@ class AbstractLinkedList(metaclass=ABCMeta):
             counter += 1
 
         return temp.data
+        
+    def __iter__(self):
+        """Makes instances of linked lists work with keywords that use the iterator protocol.
+        """
+
+        if not self.head:
+            return
+        
+        temp = self.head
+        condition = True
+
+        while condition:
+            yield temp.data
+            temp = temp.next
+            if temp is self.head or not temp:
+                condition = False
 
     def __str__(self):
         template = "{}({})"
@@ -37,14 +72,6 @@ class AbstractLinkedList(metaclass=ABCMeta):
         template = "<{} object at {}>"
         mem_address = '0x' + '{:0>16}'.format(hex(id(self)).upper()[2:])
         return template.format(self.__class__.__name__, mem_address)
-
-    @abstractmethod
-    def __iter__(self):
-        pass
-
-    @abstractmethod
-    def __len__(self):
-        pass
 
     @abstractmethod
     def push(self, new_node_data):
@@ -61,39 +88,6 @@ class AbstractLinkedList(metaclass=ABCMeta):
     @abstractmethod
     def delete_node(self, index):
         pass
-	
-
-class AbstractSingleOrDoubleLinkedList(AbstractLinkedList):
-    """Defines methods common to both singly and doubly linked lists.
-    """
-
-    def __init__(self, head_node):
-        super().__init__(head_node)
-
-    def __len__(self):
-        """Make instances of linked lists work with Python's len() function.
-
-        returns: how many nodes are present in the linked list
-        """
-
-        counter = 0
-        temp = self.head
-
-        while temp:
-            counter += 1
-            temp = temp.next
-
-        return counter
-
-    def __iter__(self):
-        """Makes instances of linked lists work with keywords that use the iterator protocol.
-        """
-
-        temp = self.head
-
-        while temp:
-            yield temp.data
-            temp = temp.next
 
 
 class AbstractNode(object):
