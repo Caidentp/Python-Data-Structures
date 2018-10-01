@@ -11,41 +11,6 @@ class CircularLinkedList(AbstractLinkedList):
     def __init__(self, head_node=None):
         super().__init__(head_node)
 
-    def __len__(self):
-        """Make instances of linked lists work with Python's len() function.
-
-        returns: how many nodes are present in the linked list
-        """
-
-        counter = 0
-        temp = self.head
-        condition = True
-
-        if self.head:
-            while condition:
-                counter += 1
-                temp = temp.next
-                if temp is self.head:
-                    condition = False
-
-        return counter
-
-    def __iter__(self):
-        """Makes instances of linked lists work with keywords that use the iterator protocol.
-        """
-
-        if not self.head:
-            return
-        
-        temp = self.head
-        condition = True
-
-        while condition:
-            yield temp.data
-            temp = temp.next
-            if temp is self.head:
-                condition = False
-
     def push(self, new_node_data):
         """Add a node to the beginning of a list.
 
@@ -104,7 +69,6 @@ class CircularLinkedList(AbstractLinkedList):
         """
 
         new_node = CircleLLNode(new_node_data)
-        counter = 0
 
         if index == 0:
             self.push(new_node_data)
@@ -115,6 +79,7 @@ class CircularLinkedList(AbstractLinkedList):
             return
 
         temp = self.head
+        counter = 0
 
         while counter < (index-1):
             temp = temp.next
@@ -130,8 +95,8 @@ class CircularLinkedList(AbstractLinkedList):
             index: position of node to be deleted
         """
 
-        if not self.head:
-            raise ValueError('List is empty')
+        if not self.head or index >= len(self):
+            raise IndexError('List index out of range')
 
         temp = self.head
 
@@ -151,9 +116,6 @@ class CircularLinkedList(AbstractLinkedList):
             temp = temp.next
             if temp.next is self.head:
                 break
-
-        if temp.next is self.head:
-            raise IndexError('List index out of range')
 
         next_node = temp.next.next
         temp.next = next_node
