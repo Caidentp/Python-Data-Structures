@@ -1,10 +1,10 @@
 from abstract_linked_list import (
-	AbstractSingleOrDoubleLinkedList,
+	AbstractLinkedList,
 	SingleLLNode
 )
 
 
-class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
+class SingleLinkedList(AbstractLinkedList):
     """Class for singly linked list.
     """
 
@@ -51,7 +51,6 @@ class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
         """
 
         new_node = SingleLLNode(new_node_data)
-        counter = 0
 
         if index == 0:
             self.push(new_node_data)
@@ -62,6 +61,7 @@ class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
             return
 
         temp = self.head
+        counter = 0
 
         while counter < (index-1):
             temp = temp.next 
@@ -77,11 +77,8 @@ class SingleLinkedList(AbstractSingleOrDoubleLinkedList):
             index: position of node to be deleted
         """
 
-        if not self.head:
-            raise ValueError('List is empty')
-
-        if index >= len(self):
-            raise IndexError('List index out of range')
+        if not self.head or index >= len(self):
+            raise IndexError('List index out of range')            
 
         temp = self.head
 
