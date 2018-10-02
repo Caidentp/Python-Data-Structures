@@ -12,7 +12,7 @@ def convert(linked_list):
     return [x for x in linked_list]
 
 
-class TestSuite(unittest.TestCase):
+class TestSinglyLinkedList(unittest.TestCase):
 
     def test_singly_push_empty_list(self):
         linked_list = SingleLinkedList()
@@ -76,6 +76,8 @@ class TestSuite(unittest.TestCase):
         self.assertEqual([1, 2, 3], convert(linked_list))
         linked_list.delete_node(2)
         self.assertEqual([1, 2], convert(linked_list))
+        with self.assertRaises(IndexError):
+            linked_list.delete_node(10)
 
     def test_singly_delete_node_in_middle(self):
         linked_list = SingleLinkedList(SingleLLNode(1))
@@ -84,6 +86,9 @@ class TestSuite(unittest.TestCase):
         self.assertEqual([1, 2, 3], convert(linked_list))
         linked_list.delete_node(1)
         self.assertEqual([1, 3], convert(linked_list))
+
+        
+class TestDoublyLinkedList(unittest.TestCase):
 
     def test_doubly_push_empty_list(self):
         linked_list = DoubleLinkedList()
@@ -147,6 +152,8 @@ class TestSuite(unittest.TestCase):
         self.assertEqual([1, 2, 3], convert(linked_list))
         linked_list.delete_node(2)
         self.assertEqual([1, 2], convert(linked_list))
+        with self.assertRaises(IndexError):
+            linked_list.delete_node(10)
 
     def test_doubly_delete_node_in_middle(self):
         linked_list = DoubleLinkedList(DoubleLLNode(1))
@@ -155,6 +162,9 @@ class TestSuite(unittest.TestCase):
         self.assertEqual([1, 2, 3], convert(linked_list))
         linked_list.delete_node(1)
         self.assertEqual([1, 3], convert(linked_list))
+
+        
+class TestCircularLinkedList(unittest.TestCase):
 
     def test_circular_push_empty_list(self):
         linked_list = CircularLinkedList()
@@ -217,6 +227,8 @@ class TestSuite(unittest.TestCase):
         self.assertEqual([1, 2, 3], convert(linked_list))
         linked_list.delete_node(2)
         self.assertEqual([1, 2], convert(linked_list))
+        with self.assertRaises(IndexError):
+            linked_list.delete_node(10)
 
     def test_circular_delete_node_in_middle(self):
         linked_list = CircularLinkedList(CircleLLNode(1))
