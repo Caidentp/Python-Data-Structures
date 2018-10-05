@@ -2,6 +2,8 @@ from abstract_queue import *
 
 
 class Node:
+    """Class for creating linked list nodes.
+    """
 
     def __init__(self, data):
         self.data = data
