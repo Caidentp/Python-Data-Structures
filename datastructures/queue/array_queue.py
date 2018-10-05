@@ -18,6 +18,9 @@ class ArrayQueue(AbstractQueue):
             temp += 1
 
     def enqueue(self, data):
+        """Add an item to the queue.
+        """
+        
         if self.back == len(self.array):
             self.expand()
         self.array[self.back] = data
@@ -25,6 +28,9 @@ class ArrayQueue(AbstractQueue):
         self.size += 1
 
     def dequeue(self):
+        """Remove an item from the queue.
+        """
+        
         if self.is_empty():
             raise IndexError('Queue is empty.')
         item = self.array[self.front]
@@ -34,13 +40,22 @@ class ArrayQueue(AbstractQueue):
         return item
 
     def peek(self):
+        """Return the first element in a queue without removing it.
+        """
+        
         if self.is_empty():
             raise IndexError('Queue is empty.')
         return self.array[self.front]
 
     def expand(self):
+        """Doubles the size of the queue.
+        """
+        
         self.array += [None] * len(self.array)
 
     @classmethod
     def change_capacity(cls, new_capacity):
+        """Change the capacity class variable.
+        """
+        
         cls.capacity = new_capacity
