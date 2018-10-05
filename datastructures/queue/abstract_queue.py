@@ -7,9 +7,15 @@ class AbstractQueue(metaclass=ABCMeta):
         self.size = 0
 
     def is_empty(self):
+        """Return True if the queue is empty.
+        """
+        
         return self.size == 0
 
     def __len__(self):
+        """Return the number of elements in a queue.
+        """
+        
         return self.size
 
     def __str__(self):
