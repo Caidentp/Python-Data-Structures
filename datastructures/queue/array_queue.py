@@ -2,6 +2,8 @@ from abstract_queue import *
 
 
 class ArrayQueue(AbstractQueue):
+    """Class for creating a queue out of a list.
+    """
 
     _capacity = 10
 
