@@ -6,6 +6,15 @@ class Node:
         self.left = None
         self.right = None
 
+    def __str__(self):
+        template = "{}({})"
+        return template.format(self.__class__.__name__, self.__dict__)
+
+    def __repr__(self):
+        template = "<{} object at {}>"
+        mem_address = '0x' + '{:0>16}'.format(hex(id(self)).upper()[2:])
+        return template.format(self.__class__.__name__, mem_address)
+
     def insert(self, data):
         if self.data:
             if data < self.data:
