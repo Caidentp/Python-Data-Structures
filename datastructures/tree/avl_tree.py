@@ -102,29 +102,24 @@ class Node:
                 self.parent._self_balance()
 
     def _rotate_right(self):
-        pivot = self.left
-        if pivot is None:
-            return
+            pivot = self.left
+            if pivot is None:
+                return
 
-        self.data, pivot.data = pivot.data, self.data
-        self.left = pivot.left
+            self.data, pivot.data = pivot.data, self.data
+            self.left = pivot.left
 
-        if self.left is not None:
-            self.left.parent = self
+            if self.left is not None:
+                self.left.parent = self
 
-        pivot.left = pivot.right
+            pivot.left = pivot.right
+            pivot.right = self.right
 
-        if pivot.left is not None:
-            pivot.left.parent = pivot
+            if self.right is not None:
+                self.right.parent = pivot
 
-        pivot.right = self.right
-
-        if pivot.right is not None:
-            pivot.right.parent = pivot
-
-        self.right = pivot
-        pivot.parent = self
-
+            self.right = pivot
+        
     def _rotate_left(self):
         pivot = self.right
         if pivot is None:
@@ -137,17 +132,12 @@ class Node:
             self.right.parent = self
 
         pivot.right = pivot.left
-
-        if pivot.right is not None:
-            pivot.right.parent = pivot
-
         pivot.left = self.left
 
-        if pivot.left is not None:
-            pivot.left.parent = pivot
+        if self.left is not None:
+            self.left.parent = pivot
 
         self.left = pivot
-        pivot.parent = self
 
     def lookup(self, data):
         if data < self.data:
