@@ -102,23 +102,23 @@ class Node:
                 self.parent._self_balance()
 
     def _rotate_right(self):
-            pivot = self.left
-            if pivot is None:
-                return
+        pivot = self.left
+        if pivot is None:
+            return
 
-            self.data, pivot.data = pivot.data, self.data
-            self.left = pivot.left
+        self.data, pivot.data = pivot.data, self.data
+        self.left = pivot.left
 
-            if self.left is not None:
-                self.left.parent = self
+        if self.left is not None:
+            self.left.parent = self
 
-            pivot.left = pivot.right
-            pivot.right = self.right
+        pivot.left = pivot.right
+        pivot.right = self.right
 
-            if self.right is not None:
-                self.right.parent = pivot
+        if self.right is not None:
+            self.right.parent = pivot
 
-            self.right = pivot
+        self.right = pivot
         
     def _rotate_left(self):
         pivot = self.right
