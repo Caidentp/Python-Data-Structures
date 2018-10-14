@@ -90,7 +90,7 @@ class Node:
                 self.parent._self_balance()
 
         elif balance == -2:
-            if self.right >= -1:
+            if self.right.balance() >= -1:
                 self.right._rotate_right()
             self._rotate_left()
 
