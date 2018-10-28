@@ -23,7 +23,6 @@ class CircularLinkedList(AbstractLinkedList):
         if not self.head:
             self.head = new_node
             return
-
         temp = self.head
         new_node.next = temp
         condition = True
@@ -32,7 +31,6 @@ class CircularLinkedList(AbstractLinkedList):
             temp = temp.next
             if temp.next is self.head:
                 condition = False
-
         temp.next = new_node
         self.head = new_node
 
@@ -48,7 +46,6 @@ class CircularLinkedList(AbstractLinkedList):
         if not self.head:
             self.head = new_node
             return
-
         new_node.next = self.head    
         temp = self.head
         condition = True
@@ -57,7 +54,6 @@ class CircularLinkedList(AbstractLinkedList):
             temp = temp.next
             if temp.next is self.head:
                 condition = False
-
         temp.next = new_node
 
     def insert(self, index, new_node_data):
@@ -77,14 +73,12 @@ class CircularLinkedList(AbstractLinkedList):
         if (index > len(self)):
             self.append(new_node_data)
             return
-
         temp = self.head
         counter = 0
 
         while counter < (index-1):
             temp = temp.next
             counter += 1
-
         new_node.next = temp.next
         temp.next = new_node
 
@@ -97,7 +91,6 @@ class CircularLinkedList(AbstractLinkedList):
 
         if not self.head or index >= len(self):
             raise IndexError('List index out of range')
-
         temp = self.head
 
         if index == 0:
@@ -107,7 +100,6 @@ class CircularLinkedList(AbstractLinkedList):
                 temp = temp.next
                 if temp.next is self.head:
                     condition = False
-
             temp.next = self.head.next
             self.head = self.head.next
             return
@@ -116,6 +108,5 @@ class CircularLinkedList(AbstractLinkedList):
             temp = temp.next
             if temp.next is self.head:
                 break
-
         next_node = temp.next.next
         temp.next = next_node
