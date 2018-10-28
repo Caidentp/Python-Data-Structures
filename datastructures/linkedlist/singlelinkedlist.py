@@ -34,12 +34,10 @@ class SingleLinkedList(AbstractLinkedList):
         if not self.head:
             self.head = new_node
             return
-
         temp = self.head
 
         while temp.next:
             temp = temp.next
-
         temp.next = new_node
 
     def insert(self, index, new_node_data):
@@ -59,14 +57,12 @@ class SingleLinkedList(AbstractLinkedList):
         if (index >= len(self)):
             self.append(new_node_data)
             return
-
         temp = self.head
         counter = 0
 
         while counter < (index-1):
             temp = temp.next 
             counter += 1
-
         new_node.next = temp.next
         temp.next = new_node
 
@@ -79,7 +75,6 @@ class SingleLinkedList(AbstractLinkedList):
 
         if not self.head or index >= len(self):
             raise IndexError('List index out of range')            
-
         temp = self.head
 
         if index == 0:
@@ -88,6 +83,5 @@ class SingleLinkedList(AbstractLinkedList):
 
         for x in range(index-1):
             temp = temp.next
-
         next_node = temp.next.next
         temp.next = next_node
