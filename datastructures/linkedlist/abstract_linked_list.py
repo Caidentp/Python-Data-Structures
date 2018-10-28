@@ -24,7 +24,6 @@ class AbstractLinkedList(metaclass=ABCMeta):
                 temp = temp.next
                 if temp is self.head or not temp:
                     condition = False
-
         return counter
 
     def __getitem__(self, index):
@@ -45,7 +44,6 @@ class AbstractLinkedList(metaclass=ABCMeta):
         while counter < index:
             temp = temp.next
             counter += 1
-
         return temp.data
         
     def __iter__(self):
@@ -54,7 +52,6 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
         if not self.head:
             return
-        
         temp = self.head
         condition = True
 
