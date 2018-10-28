@@ -23,7 +23,6 @@ class DoubleLinkedList(AbstractLinkedList):
         if not self.head:
             self.head = new_node
             return
-
         new_node.next = self.head
         self.head = new_node
         new_node.next.previous = new_node
@@ -40,12 +39,10 @@ class DoubleLinkedList(AbstractLinkedList):
         if not self.head:
             self.head = new_node
             return
-
         temp = self.head
 
         while temp.next:
             temp = temp.next
-
         temp.next = new_node
         new_node.previous = temp
 
@@ -66,14 +63,12 @@ class DoubleLinkedList(AbstractLinkedList):
         if (index >= len(self)):
             self.append(new_node_data)
             return
-
         temp = self.head
         counter = 0
 
         while counter < (index-1):
             temp = temp.next
             counter += 1
-
         new_node.next = temp.next
         temp.next = new_node
         new_node.next.previous = new_node
@@ -88,14 +83,13 @@ class DoubleLinkedList(AbstractLinkedList):
 
         if not self.head or index >= len(self):
             raise IndexError('List index out of range')
-
         temp = self.head
 
         if index == 0:
             self.head = temp.next
             return
-
         counter = 0
+
         while counter < index:
             temp = temp.next
             counter += 1
@@ -103,6 +97,5 @@ class DoubleLinkedList(AbstractLinkedList):
         if not temp.next:
             temp.previous.next = None
             return
-
         temp.next.previous = temp.previous
         temp.previous.next = temp.next
