@@ -2,7 +2,6 @@ from singly_linked_list import *
 from doubly_linked_list import *
 from circular_linked_list import *
 
-
 import unittest
 
 
