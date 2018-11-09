@@ -42,6 +42,9 @@ class HashTable(object):
     def __setitem__(self, key, value):
         self.put(key, value)
 
+    def __len__(self):
+        return self.length
+
     def get(self, key):
         index = self._hash_function(key)
 
