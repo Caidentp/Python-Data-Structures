@@ -111,12 +111,13 @@ class HashTable(object):
         else:
             probe = self.table[index].head
 
-            while probe.next is not None:
+            while probe is not None:
                 if probe.key == key:
                     probe.value = value
                     return
+                tail = probe
                 probe = probe.next
-            probe.next = LinkedList.Node(key, value)
+            tail.next = LinkedList.Node(key, value)
         self.length += 1
 
     def _hash_function(self, key):
