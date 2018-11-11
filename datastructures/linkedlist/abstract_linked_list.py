@@ -14,38 +14,38 @@ class AbstractLinkedList(metaclass=ABCMeta):
             self.size = 1
         
     def __len__(self):
-        """Make instances of linked lists work with Python's len() 
-           function.
-
-        returns: how many nodes are present in the linked list
-        """
-
         return self.size
 
-    def __getitem__(self, index: 'int') -> 'LinkedList[index]':
-        """Operator overloading [] for retrieving the index of a linked 
-           list.
+    def __getitem__(self, index: 'int'):
+        if self.head is not None and index < len(self):
+            if index < 0:
+                if abs(index) > len(self):
+                    raise IndexError('List index out of range.')
+                index = len(self) + index
+            probe = self.head
 
-        args:
-            index: position of linked list node to find
+            for x in range(index):
+                probe = probe.next
+            return probe.data
+        raise IndexError('List index out of range.')
 
-        returns: data instance variable of appropriate node
-        """
+        
 
-        if index > len(self) or self.head is None:
-            raise IndexError('List index out of range')
+    def __setitem__(self, index: 'int', data):
+        if self.head is not None and index < len(self):
+            if index < 0:
+                if abs(index) > len(self):
+                    raise IndexError('List index out of range.')
+                index = len(self) + index
 
-        temp = self.head
-
-        for x in range(index):
-            temp = temp.next
-        return temp.data
+            probe = self.head
+            for x in range(index):
+                probe = probe.next
+            probe.data = data
+        else:
+            raise IndexError('List index out of range.')
         
     def __iter__(self):
-        """Makes instances of linked lists work with keywords that use 
-           the iterator protocol.
-        """
-
         if self.head is not None:
             temp = self.head
             condition = True
@@ -89,7 +89,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
     @abstractmethod
     def insert(self, index: 'int', new_node_data):
         """Insert a node into a linked list by position.
-        
+
         args:
             index: position to insert a node at
             new_node_data: this will become the data instance variable 
