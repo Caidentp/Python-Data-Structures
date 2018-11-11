@@ -29,8 +29,6 @@ class AbstractLinkedList(metaclass=ABCMeta):
             return probe.data
         raise IndexError('List index out of range.')
 
-        
-
     def __setitem__(self, index: 'int', data):
         if self.head is not None and index < len(self):
             if index < 0:
@@ -44,7 +42,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
             probe.data = data
         else:
             raise IndexError('List index out of range.')
-        
+
     def __iter__(self):
         if self.head is not None:
             temp = self.head
