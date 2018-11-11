@@ -39,6 +39,7 @@ class CircularLinkedList(AbstractLinkedList):
             temp = self.head
             for x in range(index-1):
                 temp = temp.next
+
             new_node.next = temp.next
             temp.next = new_node
             self.size += 1
@@ -61,8 +62,8 @@ class CircularLinkedList(AbstractLinkedList):
                     break
                 previous = temp
                 temp = temp.next
-            previous.next = temp.next
 
+            previous.next = temp.next
             if temp is self.tail:
                 self.tail = previous
                 self.tail.next = self.head
