@@ -47,7 +47,6 @@ class AbstractLinkedList(metaclass=ABCMeta):
         if self.head is not None:
             temp = self.head
             condition = True
-
             while condition:
                 yield temp.data
                 temp = temp.next
