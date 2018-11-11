@@ -22,7 +22,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
         return self.size
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: 'int') -> 'LinkedList[index]':
         """Operator overloading [] for retrieving the index of a linked 
            list.
 
@@ -87,7 +87,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def insert(self, index, new_node_data):
+    def insert(self, index: 'int', new_node_data):
         """Insert a node into a linked list by position.
         
         args:
@@ -98,7 +98,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def delete(self, index):
+    def delete(self, index: 'int'):
         """Delete a node by position.
 
         args:
