@@ -2,9 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 
 class AbstractLinkedList(metaclass=ABCMeta):
-    """Defines methods common to different types of linked lists.
-    """
-
+    """Defines methods common to different types of linked lists."""
     def __init__(self, head_node):
         self.head = head_node
         self.tail = head_node
@@ -68,9 +66,8 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
         args:
             new_node_data: this will become the data instance variable 
-                           of a node class
+                of a node class
         """
-
         pass
 
     @abstractmethod
@@ -79,7 +76,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
         args:
             new_node_data: this will become the data instance variable 
-                           of a node class
+                of a node class
         """
         pass
 
@@ -90,7 +87,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
         args:
             index: position to insert a node at
             new_node_data: this will become the data instance variable 
-                           of a node class
+                of a node class
         """
         pass
 
@@ -101,14 +98,11 @@ class AbstractLinkedList(metaclass=ABCMeta):
         args:
             index: position of node to be deleted
         """
-
         pass
 
 
 class AbstractNode(object):
-    """Defines methods common to all types of linked list nodes.
-    """
-
+    """Defines methods common to all types of linked list nodes."""
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -123,26 +117,20 @@ class AbstractNode(object):
 
 
 class SNode(AbstractNode):
-    """Singly linked list node.
-    """
-
+    """Singly linked list node."""
     def __init__(self, data=None):
         super().__init__(data)
 
 
 class DNode(AbstractNode):
-    """Doubly linked list node.
-    """
-
+    """Doubly linked list node."""
     def __init__(self, data=None):
         super().__init__(data)
         self.previous = None
 
 
 class CNode(AbstractNode):
-    """Circular linked list node.
-    """
-
+    """Circular linked list node."""
     def __init__(self, data=None):
         super().__init__(data)
         self.next = self
