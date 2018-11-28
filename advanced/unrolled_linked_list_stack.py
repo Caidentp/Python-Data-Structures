@@ -2,41 +2,41 @@ class Node(object):
 
     max_size = 10
 
-    def __init__(self):
+    def __init__(self, next=None):
         self.array = [0] * Node.max_size
         self.top = 0
-        self.next = None
-        self.previous = None
+        self.next = next
 
 
 class Stack(object):
 
     def __init__(self):
         self.head = None
+        
+    def __getitem__(self, index):
+        return self.head.array[index]
+    
+    def __setitem__(self, index, key):
+        self.head.array[index] = key
 
     def push(self, data):
         if self.head is None:
             self.head = Node()
-
         elif self.head.top == 10:
-            new_node = Node()
-            new_node.next = self.head
-            self.head.previous = new_node
-            self.head = new_node
+            self.head = Node(self.head)
 
-        self.head.array[self.head.top] = data
+        self[self.head.top] = data
         self.head.top += 1
 
     def pop(self):
         if self.head is not None:
             self.head.top -= 1
-            data = self.head.array[self.head.top]
+            data = self[self.head.top]
 
             if self.head.top == 0:
+                temp = self.head
                 self.head = self.head.next
-
-                if self.head is not None:
-                    self.head.previous = None
+                temp.next = None
             return data
 
     def peek(self):
