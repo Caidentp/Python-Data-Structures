@@ -41,8 +41,7 @@ class Stack(object):
 
     def peek(self):
         if self.head is not None:
-            data = self.head.array[self.head.top-1]
-            return data
+            return self.head.array[self.head.top-1]
 
     def empty(self):
         return self.head is None
