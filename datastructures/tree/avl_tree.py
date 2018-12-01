@@ -1,4 +1,4 @@
-class Node:
+class Node(object):
 
     def __init__(self, data=None, parent=None):
         self.data = data
@@ -6,40 +6,43 @@ class Node:
         self.left = None
         self.right = None
 
-    def __str__(self):
-        template = "{}({})"
-        return template.format(self.__class__.__name__, self.__dict__)
-
-    def __repr__(self):
-        template = "<{} object at {}>"
-        mem_address = '0x' + '{:0>16}'.format(hex(id(self)).upper()[2:])
-        return template.format(self.__class__.__name__, mem_address)
-
     def insert(self, data):
-        if self.data:
+        if self.data is not None:
             if data < self.data:
                 if self.left is None:
                     self.left = Node(data, self)
-                    self.left._self_balance()
                 else:
                     self.left.insert(data)
             elif data > self.data:
                 if self.right is None:
                     self.right = Node(data, self)
-                    self.right._self_balance()
                 else:
                     self.right.insert(data)
+            self.self_balance()
         else:
             self.data = data
 
+    def find(self, data):
+        if data < self.data:
+            if self.left is not None:
+                return self.left.find(data)
+            else:
+                return None
+        elif data > self.data:
+            if self.right is not None:
+                return self.right.find(data)
+            else:
+                return None
+        else:
+            return self
+
     def delete(self, data):
-        node = self.lookup(data)
-        parent = node.parent
-
+        node = self.find(data)
         if node is not None:
-            children = node.child_count()
+            child_count = node.children()
+            parent = node.parent
 
-            if children == 0:
+            if child_count == 0:
                 if parent is not None:
                     if parent.left is node:
                         parent.left = None
@@ -48,7 +51,7 @@ class Node:
                 else:
                     self.data = None
 
-            elif children == 1:
+            elif child_count == 1:
                 if node.left is not None:
                     successor = node.left
                 else:
@@ -61,16 +64,15 @@ class Node:
                 else:
                     self.left = successor.left
                     self.right = successor.right
-                    self.data = successor.data 
+                    self.data = successor.data
 
             else:
                 parent = node
-                successor = node.right
+                successor = parent.right
 
-                while successor is not None:
+                while successor.left is not None:
                     parent = successor
                     successor = successor.left
-
                 node.data = successor.data
 
                 if parent.left is successor:
@@ -78,128 +80,81 @@ class Node:
                 else:
                     parent.right = successor.right
 
-    def _self_balance(self):
-        balance = self.balance()
+            node.self_balance()
 
-        if balance == 2:
-            if self.left.balance() <= -1:
-                self.left._rotate_left()
-            self._rotate_right()
+    def depth(self):
+        left_depth = 0 if self.left is None else self.left.depth()
+        right_depth = 0 if self.right is None else self.right.depth()
+        return 1 + max(left_depth, right_depth)
 
-            if self.parent is not None:
-                self.parent._self_balance()
+    def balance(self):
+        left_depth = 0 if self.left is None else self.left.depth()
+        right_depth = 0 if self.right is None else self.right.depth()
+        return left_depth - right_depth
 
-        elif balance == -2:
-            if self.right.balance() >= -1:
-                self.right._rotate_right()
-            self._rotate_left()
-
-            if self.parent is not None:
-                self.parent._self_balance()
-
-        else:
-            if self.parent is not None:
-                self.parent._self_balance()
-
-    def _rotate_right(self):
-        pivot = self.left
-        if pivot is None:
+    def rotate_right(self):
+        if self.left is None:
             return
 
-        self.data, pivot.data = pivot.data, self.data
-        self.left = pivot.left
+        successor = self.left
+        self.data, successor.data = successor.data, self.data
+        self.left = successor.left
 
         if self.left is not None:
             self.left.parent = self
 
-        pivot.left = pivot.right
-        pivot.right = self.right
+        successor.left = successor.right
+        successor.right = self.right
 
-        if self.right is not None:
-            self.right.parent = pivot
+        if successor.right is not None:
+            successor.right.parent = successor
+        self.right = successor
 
-        self.right = pivot
-        
-    def _rotate_left(self):
-        pivot = self.right
-        if pivot is None:
+    def rotate_left(self):
+        if self.right is None:
             return
 
-        self.data, pivot.data = pivot.data, self.data
-        self.right = pivot.right
+        successor = self.right
+        self.data, successor.data = successor.data, self.data
+        self.right = successor.right
 
         if self.right is not None:
             self.right.parent = self
 
-        pivot.right = pivot.left
-        pivot.left = self.left
+        successor.right = successor.left
+        successor.left = self.left
 
-        if self.left is not None:
-            self.left.parent = pivot
+        if successor.left is not None:
+            successor.left.parent = successor
+        self.left = successor
 
-        self.left = pivot
+    def self_balance(self, flag=False):
+        balance = self.balance()
 
-    def lookup(self, data):
-        if data < self.data:
-            if self.left is None:
-                return None
-            else:
-                return self.left.lookup(data)
-        elif data > self.data:
-            if self.right is None:
-                return None
-            else:
-                return self.right.lookup(data)
+        if balance == 2:
+            if self.left.balance() <= -1:
+                self.left.rotate_left()
+            self.rotate_right()
+
+            if self.parent is not None:
+                self.parent.self_balance()
+
+        elif balance == -2:
+            if self.right.balance() >= -1:
+                self.right.rotate_right()
+            self.rotate_left()
+
+            if self.parent is not None:
+                self.parent.self_balance()
+
         else:
-            return self
+            if self.parent is not None:
+                self.parent.self_balance()
 
-    def child_count(self):
-        counter = 0
+    def children(self):
+        count = 0
         if self.left is not None:
-            counter += 1
+            count += 1
         if self.right is not None:
-            counter += 1
-        return counter
-
-    def balance(self):
-        if self.left is not None:
-            left_depth = self.left.depth()
-        else:
-            left_depth = 0
-        if self.right is not None:
-            right_depth = self.right.depth()
-        else:
-            right_depth = 0
-        return left_depth - right_depth
-
-    def depth(self):
-        if self.left is not None:
-            left_depth = self.left.depth()
-        else:
-            left_depth = 0
-        if self.right is not None:
-            right_depth = self.right.depth()
-        else:
-            right_depth = 0
-        return max(left_depth, right_depth) + 1
-
-    def preorder(self):
-        print(self.data, end=" ")
-        if self.left is not None:
-            self.left.preorder()
-        if self.right is not None:
-            self.right.preorder()
-
-    def inorder(self):
-        if self.left is not None:
-            self.left.inorder()
-        print(self.data, end=" ")
-        if self.right is not None:
-            self.right.inorder()
-
-    def postorder(self):
-        if self.left is not None:
-            self.left.postorder()
-        if self.right is not None:
-            self.right.postorder()
-        print(self.data, end=" ")
+            count += 1
+        return count
