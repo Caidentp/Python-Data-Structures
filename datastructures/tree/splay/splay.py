@@ -5,7 +5,7 @@ class Node(object):
         self.parent = parent
         self.left = None
         self.right = None
-        
+
     def insert(self, data):
         if self.data is None:
             self.data = data
@@ -24,7 +24,7 @@ class Node(object):
                 self.right.insert(data)
         elif data == data:
             self.splay()
-            
+
     def find(self, data):
         if data < self.data:
             if self.left is not None:
@@ -40,13 +40,12 @@ class Node(object):
             data = self.data
             self.splay()
             return data
-            
-        
+
     def right_child_of(self):
         if self.parent.left is self:
             return False
         return True
-    
+
     def rotate_right(self):
         if self.left is None:
             return
@@ -80,25 +79,25 @@ class Node(object):
         if successor.left is not None:
             successor.left.parent = successor
         self.left = successor
-    
+
     def zig_zig_left_left(self):
         p = self.parent
         g = p.parent
         p.rotate_left()
         g.rotate_left()
-    
+
     def zig_zig_right_right(self):
         p = self.parent
         g = p.parent
         p.rotate_right()
         g.rotate_right()
-    
+
     def zig_zag_left_right(self):
         p = self.parent
         g = p.parent
         p.rotate_left()
         g.rotate_right()
-    
+
     def zig_zag_right_left(self):
         p = self.parent
         g = p.parent
