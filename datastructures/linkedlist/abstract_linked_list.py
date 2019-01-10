@@ -66,7 +66,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
         args:
             new_node_data: this will become the data instance variable 
-                of a node class
+                           of a node class
         """
         pass
 
@@ -76,7 +76,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
 
         args:
             new_node_data: this will become the data instance variable 
-                of a node class
+                           of a node class
         """
         pass
 
@@ -87,7 +87,7 @@ class AbstractLinkedList(metaclass=ABCMeta):
         args:
             index: position to insert a node at
             new_node_data: this will become the data instance variable 
-                of a node class
+                           of a node class
         """
         pass
 
