@@ -1,8 +1,7 @@
 class LinkedList(object):
     """Linked list used as hash table indices for
-       collision avoidance.
+    collision avoidance.
     """
-
     def __init__(self):
         self.head = None
 
@@ -17,9 +16,7 @@ class LinkedList(object):
 
 
     class Node(object):
-        """Node for linked list.
-        """
-
+        """Node for linked list."""
         def __init__(self, key, value, next=None):
             self.key = key
             self.value = value
@@ -28,9 +25,8 @@ class LinkedList(object):
 
 class HashTable(object):
     """Hash table implementation which uses linked lists
-       as list indices for collision avoidance.
+    as list indices for collision avoidance.
     """
-
     def __init__(self, size=1024):
         self.size = size
         self.table = [None] * self.size 
@@ -47,14 +43,14 @@ class HashTable(object):
 
     def get(self, key):
         """Get an element from the table by key.
-           O(1) best time O(n) worst time.
+        O(1) best time O(n) worst time.
 
         args:
             key: Key to retrieve value pair of.
 
-        return: Value of key argument if it exists in the table.
+        return:
+            Value of key argument if it exists in the table.
         """
-
         index = self._hash_function(key)
 
         if self.table[index] is not None:
@@ -68,7 +64,7 @@ class HashTable(object):
 
     def delete(self, key):
         """Remove a key-value pair from the table by key.
-           O(1) best time O(n) worst time.
+        O(1) best time O(n) worst time.
 
         args:
             key: Key of key-value pair to remove from the table.
@@ -96,7 +92,7 @@ class HashTable(object):
 
     def put(self, key, value):
         """Insert a key-value pair into the table. 
-           O(1) best time O(n) worst time.
+        O(1) best time O(n) worst time.
 
         args:
             key: Key to hash for generating list index.
@@ -122,7 +118,7 @@ class HashTable(object):
 
     def _hash_function(self, key):
         """Determine the index position in the table to 
-           store the key-value pair at.
+        store the key-value pair at.
 
         args:
             key: Key used to generate a hash for.
