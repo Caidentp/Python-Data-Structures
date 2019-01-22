@@ -1,10 +1,13 @@
-from hashtable import *
-
+import os
+import sys
 import unittest
+
+sys.path.append(os.path.split(os.getcwd())[0])
+
+from hashtable import *
 
 
 class TestSuite(unittest.TestCase):
-
     def setUp(self):
         self.table = HashTable(10)
         self.table.put('a', 1)
