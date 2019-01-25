@@ -1,5 +1,4 @@
 class Graph(object):
-
     def __init__(self):
         self.master_list = dict()
 
