@@ -2,7 +2,6 @@ from abc import ABCMeta, abstractmethod
 
 
 class AbstractHeap(metaclass=ABCMeta):
-
     def __init__(self):
         self.heap = [0]
         self.size = 0
@@ -27,10 +26,14 @@ class AbstractHeap(metaclass=ABCMeta):
     def __len__(self):
         return self.size
 
-    def delete_top(self):
-        """Delete root node in a heap tree and return its value.
-        """
+    def __getitem__(self, index):
+        return self.heap[index]
 
+    def __setitem__(self, index, key):
+        self.heap[index] = key
+
+    def delete_top(self):
+        """Delete root node in a heap tree and return its value."""
         minimum = self.heap[1]
         self.heap[1] = self.heap[self.size]
         self.size -= 1
@@ -44,7 +47,6 @@ class AbstractHeap(metaclass=ABCMeta):
         args:
             data: value of node to insert into heap.
         """
-
         self.heap.append(data)
         self.size += 1
         self._perc_up(self.size)
@@ -56,7 +58,6 @@ class AbstractHeap(metaclass=ABCMeta):
         args:
             iterable: any iterable object to turn into a heap.
         """
-
         new_heap = cls()
         new_heap.size = len(iterable)
         new_heap.heap += list(iterable)
@@ -77,7 +78,6 @@ class AbstractHeap(metaclass=ABCMeta):
         args:
             index: index of node to compare to its parent.
         """
-
         pass
 
     @abstractmethod
@@ -87,7 +87,6 @@ class AbstractHeap(metaclass=ABCMeta):
         args:
             index: index of node to compare to its children.
         """
-
         pass
 
     @abstractmethod
@@ -97,5 +96,4 @@ class AbstractHeap(metaclass=ABCMeta):
         args:
             index: index of parent to compare to its children.
         """
-
         pass
